@@ -14,13 +14,12 @@
     <div id="app" style="margin-top: 2rem">
       <div class="container">
         <div class="form-group">
-          <input type="search" />
+          <input type="search" placeholder="search" v-model="filter.search" @input="marking()" />
         </div>
         <ul>
-          <li>Email</li>
-          <li class="marked">Email</li>
-          <li>...</li>
-          <li>Email</li>
+          <li v-for="markedEmail in markedEmails" :class="{ marked : markedEmail.status=='marked' }">
+            {{ markedEmail.name }}
+          </li>
         </ul>
       </div>
     </div>
