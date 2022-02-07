@@ -18,7 +18,7 @@
 
       <h3>Описание</h3>
 
-      <meetup-description :description="description"></meetup-description>
+      <meetup-description :description="description" :organizer="organizer"></meetup-description>
     </div>
 
     <script type="module">
@@ -37,6 +37,9 @@
         computed: {
           description() {
             return this.meetups[this.selectedMeetup].description;
+          },
+          organizer() {
+            return this.meetups[this.selectedMeetup].organizer;
           },
         },
       }).mount('#app');
