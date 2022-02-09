@@ -14,12 +14,12 @@
   </head>
   <body>
     <div id="app" class="sample">
-      <h1 class="my">С изображением</h1>
+      <!-- <h1 class="my">С изображением</h1> -->
       <meetup-cover :title="meetupWithImage.title" :image="meetupWithImage.image"></meetup-cover>
 
       <hr class="my" />
 
-      <h1 class="my">Без изображения</h1>
+      <!-- <h1 class="my">Без изображения</h1> -->
       <meetup-cover :title="meetupWithoutImage.title" :image="meetupWithoutImage.image"></meetup-cover>
     </div>
 
@@ -43,6 +43,14 @@
               image: null,
             },
           };
+        },
+        computed: {
+          title() {
+            return this.meetupWithImage.title;
+          },
+          image() {
+            return this.meetupWithImage.image;
+          },
         },
       }).mount('#app');
     </script>
