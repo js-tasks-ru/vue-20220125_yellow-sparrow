@@ -14,8 +14,8 @@ export default {
   },
 
   computed: {
-    cover() {
-      return 'url(' + this.image + ')';
+    backgroundImage() {
+      return this.image ? `url('${this.image}')` : 'var(--default-cover)';
     },
   },
 };
@@ -25,7 +25,7 @@ export default {
 .meetup-cover {
   background-size: cover;
   background-position: center;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--default-cover), v-bind(cover);
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), v-bind(backgroundImage);
   display: flex;
   flex-direction: column;
   align-items: center;
