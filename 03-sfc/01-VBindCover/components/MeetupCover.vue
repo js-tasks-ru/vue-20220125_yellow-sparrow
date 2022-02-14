@@ -9,8 +9,8 @@ export default {
   name: 'MeetupCover',
 
   props: {
-    image: { type: String },
     title: { type: String },
+    image: { type: String },
   },
 
   computed: {
