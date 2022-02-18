@@ -1,14 +1,15 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <ui-icon class="toast__icon" icon="check-circle" />
-      <span>Success Toast Example</span>
-    </div>
-
-    <div class="toast toast_error">
-      <ui-icon class="toast__icon" icon="alert-circle" />
-      <span>Error Toast Example</span>
-    </div>
+    <template v-for="(toast, index) in toasts" :key="index">
+      <div v-if="toast.type == 'success_toast'" class="toast toast_success">
+        <ui-icon class="toast__icon" icon="check-circle" />
+        <span>{{ toast.messageLocal }}</span>
+      </div>
+      <div v-else-if="toast.type == 'error_toast'" class="toast toast_error">
+        <ui-icon class="toast__icon" icon="alert-circle" />
+        <span>{{ toast.messageLocal }}</span>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -19,6 +20,37 @@ export default {
   name: 'TheToaster',
 
   components: { UiIcon },
+
+  props: {
+    autoHideDelay: { type: Number, default: 5000 },
+  },
+
+  data() {
+    return {
+      messageLocal: null,
+      type: null,
+      toasts: [],
+    };
+  },
+
+  methods: {
+    success(message) {
+      this.messageLocal = message;
+      this.type = 'success_toast';
+      this.toasts.push({ messageLocal: message, type: 'success_toast', autoHideDelay: this.autoHideDelay });
+      setTimeout(() => {
+        this.toasts.splice(0, 1);
+      }, this.autoHideDelay);
+    },
+    error(message) {
+      this.messageLocal = message;
+      this.type = 'error_toast';
+      this.toasts.push({ messageLocal: message, type: 'error_toast', autoHideDelay: this.autoHideDelay });
+      setTimeout(() => {
+        this.toasts.splice(0, 1);
+      }, this.autoHideDelay);
+    },
+  },
 };
 </script>
 
