@@ -5,7 +5,7 @@
       <form class="form" @submit.prevent="handleSubmit">
         <ui-form-group label="Email">
           <div class="input-group">
-            <input name="email" type="email" placeholder="demo@email" class="form-control" />
+            <input v-model="email" name="email" type="email" placeholder="demo@email" class="form-control" />
           </div>
         </ui-form-group>
         <ui-form-group label="Пароль">
@@ -16,7 +16,9 @@
         <div class="form__buttons">
           <button type="submit" class="button button_primary button_block">Войти</button>
         </div>
-        <div class="form__append">Нет аккаунта? <a href="/register" class="link">Зарегистрируйтесь</a></div>
+        <div class="form__append">
+          Нет аккаунта? <router-link :to="{ name: 'register' }">Зарегистрируйтесь</router-link>
+        </div>
       </form>
     </ui-container>
   </div>
@@ -33,10 +35,23 @@ export default {
     UiFormGroup,
     UiContainer,
   },
-
+  data() {
+    return {
+      email: '',
+    };
+  },
+  // computed: {
+  //   from() {
+  //     return this.email ? this.email : null;
+  //   },
+  // },
   methods: {
     handleSubmit() {
-      // Требуется обработать сабмит формы
+      if (this.email) {
+        this.$router.redirect({ name: 'register', query: { from: this.email } });
+      } else {
+        this.$router.push({ name: 'index' });
+      }
     },
   },
 };
